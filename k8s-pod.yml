@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: yishaiz/webserver:v1.2
+        image: royselekter/webserver
         # image: yishaiz/webserver:latest
         ports:
         - containerPort: 5000
