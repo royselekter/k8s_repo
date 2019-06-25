@@ -5,7 +5,7 @@ metadata:
   name: opsschool-service
 spec:
   selector:    
-    app: flask-web
+    name: opsschool-flask-web
   type: NodePort
   ports:  
   - name: http
@@ -19,21 +19,66 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app-deployment
-  labels:
-    name: my-app
+  labels: 
+    name: opsschool-flask-web # label of deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      name: my-app
+      name: opsschool-flask-web
   template:
     metadata:
       labels:
-        name: my-app
+        name: opsschool-flask-web # use in selector
     spec:
       containers:
       - name: my-app
-        image: royselekter/webserver:latest
+        image: yishaiz/webserver:v1.2
+        # image: yishaiz/webserver:latest
         ports:
         - containerPort: 5000
+
+
+
+
+
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:  
+#   name: opsschool-service
+# spec:
+#   selector:    
+#     app: flask-web
+#   type: NodePort
+#   ports:  
+#   - name: http
+#     port: 80
+#     targetPort: 5000
+#     nodePort: 30036
+#     protocol: TCP
+
+# ---
+# apiVersion: apps/v1 
+# kind: Deployment
+# metadata:
+#   name: my-app-deployment
+#   labels:
+#     name: my-app
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       name: my-app
+#   template:
+#     metadata:
+#       labels:
+#         name: my-app
+#     spec:
+#       containers:
+#       - name: my-app
+#         image: royselekter/webserver:latest
+#         ports:
+#         - containerPort: 5000
 
